@@ -30,25 +30,27 @@ def main():
 
     ##  PART 3: BAR PLOTS AND HISTOGRAMS  ##
     # 1
-
+    part3.barplot_fta(pred_universe)
     # 2
-
+    part3.barplot_fta_by_sex(pred_universe)
     # 3
-
+    part3.histogram_age_at_arrest(pred_universe)
     # 4
-
+    part3.histogram_age_bins(pred_universe)
     ##  PART 4: CATEGORICAL PLOTS  ##
     # 1
-    
+    part4.catplot_felony(pred_universe)    
     # 2
-
+    part4.catplot_nonfelony(pred_universe)
     # 3
-
+    part4.catplot_felony_with_hue(pred_universe)
+    # 4
+    part4.catplot_nonfelony_with_hue(pred_universe)
     ##  PART 5: SCATTERPLOTS  ##
     # 1
-    
+    part5.scatter_felony_vs_nonfelony(pred_universe)    
     # 2
-
+    part5.scatter_felony_vs_actual_rearrest(pred_universe)
 
 if __name__ == "__main__":
     main()

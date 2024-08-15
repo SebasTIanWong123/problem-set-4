@@ -4,7 +4,8 @@ PART 4: CATEGORICAL PLOTS
 - Update main() in main.py to generate the plots and print statments when called
 - All plots should be output as PNG files to `data/part4_plots`
 '''
-
+import seaborn as sns
+import matplotlib.pyplot as plt
 ##  UPDATE `part1_etl.py`  ##
 # 1. The charge_no column in arrest events tells us the charge degree and offense category for each arrest charge. 
 # An arrest can have multiple charges. We want to know if an arrest had at least one felony charge.
@@ -20,16 +21,24 @@ PART 4: CATEGORICAL PLOTS
 
 ##  PLOTS  ##
 # 1. Create a catplot where the categories are charge type and the y-axis is the prediction for felony rearrest. Set kind='bar'.
-
+def catplot_felony(pred_universe):
+  sns.catplot(data=pred_universe, x='charge_degree', y='prediction_felony', kind='bar')
+  plt.savefig('./data/part4_plots/catplot_felony.png', bbox_inches='tight')
+   
 
 # 2. Now repeat but have the y-axis be prediction for nonfelony rearrest
-# 
+def catplot_nonfelony(pred_universe):
+  sns.catplot(data=pred_universe, x='charge_degree', y='prediction_nonfelony', kind='bar')
+  plt.savefig('./data/part4_plots/catplot_nonfelony.png', bbox_inches='tight')
 # In a print statement, answer the following question: What might explain the difference between the plots?
-
-
+  print("The difference in the plots may be explained by how well the model differentiates between nonfelony and felony charges ")
 # 3. Repeat the plot from 1, but hue by whether the person actually got rearrested for a felony crime
-# 
+def catplot_felony_with_hue(pred_universe):
+    sns.catplot(data=pred_universe, x='charge_degree', y='prediction_felony', hue='has_felony_charge', kind='bar')
+    plt.savefig('./data/part4_plots/catplot_felony_with_hue.png', bbox_inches='tight')
+    print("arrestees with a charge prediciton who did not get rearrested for a felony maybe a higher predicted probability due to model bias")
 # In a print statement, answer the following question: 
 # What does it mean that prediction for arrestees with a current felony charge, 
 # but who did not get rearrested for a felony crime have a higher predicted probability than arrestees with a current misdemeanor charge, 
 # but who did get rearrested for a felony crime?
+    

@@ -37,4 +37,10 @@ def extract_transform():
     charge_counts = arrest_events.groupby(['charge_degree']).size().reset_index(name='count')
     charge_counts_by_offense = arrest_events.groupby(['charge_degree', 'offense_category']).size().reset_index(name='count')
     
+    felony_charge = arrest_events.groupby('arrest_id').apply(
+        lambda x: pd.Series({'has_felony_charge': (x['charge_degree'] == 'Felony').any()})
+    ).reset_index()
+
+    pred_universe = pred_universe.merge(felony_charge, on='arrest_id')
+
     return pred_universe, arrest_events, charge_counts, charge_counts_by_offense
